@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="css/style.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&display=swap" rel="stylesheet">
+
+    <script src="https://kit.fontawesome.com/fd023a02cc.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    
+    <title>Document</title>
+</head>
+<body>
+
+
+    <div class="container-md">
+
+        <nav class="navbar navbar-light">
+            <span class="navbar-brand mb-0 h1">My weather app</span>
+            <span class="navbar-brand mb-0 h1"><i class="fa-solid fa-bars"></i></span>
+          </nav>
+
+
+        <div class="row header">
+
+            <div class="col-md-6">
+
+                <form action="" id="city-form">
+                    <input type="text" autocomplete="off" id="search" placeholder="Search your city" />
+                    <input type="submit" class="btn btn-outline-primary" />
+                </form>
+                    
+                
+
+            </div>
+            <div class="col-md-3">
+                
+            </div>
+            <div class="col-md-3">
+                <i class="fa-solid fa-location-dot"></i> <button type="button" class="btn button-proper" id="geoloc">
+                    My location
+                </button>
+            </div>
+        
+        </div>
+
+        <div class="row details">
+
+            <div class="col-md-4">
+                <h1><span id="current-city">Lviv</span> | <span id="today">Thursday May 25</span></h1>
+                <h2 id="temp-today"><span id="temp-digits">0</span><span id="temp-unit">°C</span></h2>
+                <button type="button" class="btn btn-light button-proper" id="buttonTemp">Convert</button>
+            </div>
+               
+            <div class="col-md-8">
+                <div class="row">
+                    
+                    <div class="col-md-6">
+                        <h3>High UV index</h3>
+                        <h5>Gusts of wind
+                            <br>20 to 29 km/h
+                        </h5>
+                    </div>
+                    <div class="col-md-6">
+                        <p><img class="current float-right" src="media\sun--v1.png" alt=""></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+                <div class="col-md-1">
+
+                </div>
+                <div class="col-md-2">
+                    <div class="day">
+                        <h1>Fri</h1>
+                        <h2><span id="test">22°C</span></h2>
+                    </div>
+                    <div>
+                        <img src="media\icons8-partly-cloudy-day-100.png" alt="">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="day">
+                        <h1>Sat</h1>
+                        <h2>21°C</h2>
+                    </div>
+                    <div>
+                        <img src="media\icons8-storm-100.png" alt="">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="day">
+                        <h1>Sun</h1>
+                        <h2>26°C</h2>
+                    </div>
+                    <div>
+                        <img src="media\icons8-sun-100.png" alt="">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="day">
+                        <h1>Mon</h1>
+                        <h2>20°C</h2>
+                    </div>
+                    <div>
+                        <img src="media\icons8-rain-100.png" alt="">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="day">
+                        <h1>Tue</h1>
+                        <h2>25°C</h2>
+                    </div>
+                    <div>
+                        <img src="media\icons8-sun-100.png" alt="">
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    
+                </div>
+        </div>
+
+    </div>
+
+
+    
+
+<script src="css/index.js"></script>
+    
+</body>
+</html>
