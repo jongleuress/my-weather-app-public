@@ -5,8 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link href="css/style.css" rel="stylesheet">
-
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,6 +16,8 @@
     <script src="https://kit.fontawesome.com/fd023a02cc.js" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
+    <link href="css/style.css" rel="stylesheet">
+
     
     <title>Document</title>
 </head>
@@ -27,14 +27,14 @@
     <div class="container-md">
 
         <nav class="navbar navbar-light">
-            <span class="navbar-brand mb-0 h1">My weather app</span>
-            <span class="navbar-brand mb-0 h1"><i class="fa-solid fa-bars"></i></span>
+            <span class="navbar-brand mb-0 h1" id="logo">My weather app</span>
+            <span class="navbar-brand mb-0 h1" id="bar-icon"><i class="fa-solid fa-bars"></i></span>
           </nav>
 
 
         <div class="row header">
 
-            <div class="col-md-6">
+            <div class="col-md-6 first-col">
 
                 <form action="" id="city-form">
                     <input type="text" autocomplete="off" id="search" placeholder="Search your city" />
@@ -57,23 +57,23 @@
 
         <div class="row details">
 
-            <div class="col-md-4">
+            <div class="col-md-4 first-col">
                 <h1><span id="current-city">Lviv</span> | <span id="today">Thursday May 25</span></h1>
                 <h2 id="temp-today"><span id="temp-digits">0</span><span id="temp-unit">°C</span></h2>
-                <button type="button" class="btn btn-light button-proper" id="buttonTemp">Convert</button>
+                <button type="button" class="btn btn-light button-proper" id="buttonTemp">Convert °C|F</button>
             </div>
                
             <div class="col-md-8">
                 <div class="row">
                     
                     <div class="col-md-6">
-                        <h3>High UV index</h3>
-                        <h5>Gusts of wind
-                            <br>20 to 29 km/h
-                        </h5>
+                        <h2 id="descr-gen"></h2>
+                        <h3 id="descr-det"></h3>
+                        <h4 id="wind">0</h4>
+                        <h4 id="hum">0</h4>
                     </div>
                     <div class="col-md-6">
-                        <p><img class="current float-right" src="media\sun--v1.png" alt=""></p>
+                        <p><img class="img-fluid" id="main-icon"px src="media\sun--v1.png" alt=""></p>
                     </div>
                 </div>
             </div>
@@ -89,7 +89,7 @@
                         <h2><span id="test">22°C</span></h2>
                     </div>
                     <div>
-                        <img src="media\icons8-partly-cloudy-day-100.png" alt="">
+                        <img class="img-fluid" src="media\icons8-partly-cloudy-day-100.png" alt="">
                     </div>
                 </div>
                 <div class="col-md-2">
@@ -98,7 +98,7 @@
                         <h2>21°C</h2>
                     </div>
                     <div>
-                        <img src="media\icons8-storm-100.png" alt="">
+                        <img class="img-fluid" src="media\icons8-storm-100.png" alt="">
                     </div>
                 </div>
                 <div class="col-md-2">
@@ -107,7 +107,7 @@
                         <h2>26°C</h2>
                     </div>
                     <div>
-                        <img src="media\icons8-sun-100.png" alt="">
+                        <img class="img-fluid" src="media\icons8-sun-100.png" alt="">
                     </div>
                 </div>
                 <div class="col-md-2">
@@ -116,7 +116,7 @@
                         <h2>20°C</h2>
                     </div>
                     <div>
-                        <img src="media\icons8-rain-100.png" alt="">
+                        <img class="img-fluid" src="media\icons8-rain-100.png" alt="">
                     </div>
                 </div>
                 <div class="col-md-2">
@@ -125,13 +125,14 @@
                         <h2>25°C</h2>
                     </div>
                     <div>
-                        <img src="media\icons8-sun-100.png" alt="">
+                        <img class="img-fluid" src="media\icons8-sun-100.png" alt="">
                     </div>
                 </div>
                 <div class="col-md-1">
                     
                 </div>
-                <a id="git" href="https://github.com/jongleuress/my-weather-app-public">Link to my GitHub repository</a>
+
+             <p id="attr"><a href="https://github.com/jongleuress/my-weather-app-public">Open Code by Yulia Oliynyk</a></p>
         </div>
 
     </div>

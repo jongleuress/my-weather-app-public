@@ -1,26 +1,3 @@
-// let weather = {
-//   "paris": {
-//     temp: 19.7,
-//     humidity: 80
-//   },
-//   "tokyo": {
-//     temp: 17.3,
-//     humidity: 50
-//   },
-//   "lisbon": {
-//     temp: 30.2,
-//     humidity: 20
-//   },
-//   "san francisco": {
-//     temp: 20.9,
-//     humidity: 100
-//   },
-//   "moscow": {
-//     temp: -5,
-//     humidity: 20
-//   }
-// };
-
 let form = document.querySelector("#city-form");
 let cityName = document.querySelector("#current-city");
 
@@ -46,6 +23,16 @@ form.addEventListener("submit", function cityNameCur(event) {
     let tempRightNow = Math.round(response.data.main.temp);
     currentTemp.innerHTML = tempRightNow;
     currentUnit.innerHTML = "°C";
+    let weatherTodayGen = document.querySelector("#descr-gen");
+    weatherTodayGen.innerHTML = response.data.weather[0].main;
+    let weatherTodayWind = document.querySelector("#wind");
+    let windSpeed = response.data.wind.speed.toString();
+    weatherTodayWind.innerHTML = `Wind speed: ${windSpeed} k/h`;
+    let weatherTodayDetails = document.querySelector("#descr-det");
+    weatherTodayDetails.innerHTML = response.data.weather[0].description;
+    let humidity = document.querySelector("#hum");
+    let humValue = response.data.main.humidity;
+    humidity.innerHTML = `Humidity: ${humValue}%`;
   }
 
   axios.get(apiURL).then(displayTemp);
@@ -62,6 +49,8 @@ form.addEventListener("submit", function cityNameCur(event) {
 
 let thisDate = new Date();
 
+// thisDate = thisDate.toLocaleTimeString('uk-UA');
+
 function formatDate() {
   let weekDays = [
     "Sunday",
@@ -76,6 +65,12 @@ function formatDate() {
   let day = weekDays[thisDate.getDay()];
   let hour = thisDate.getHours();
   let minute = thisDate.getMinutes();
+  if (minute < 10) {
+    minute = `0${minute}`
+  }
+  if (hour < 10) {
+    hour = `0${hour}`
+  }
 
   let actualDate = `${day} ${hour}:${minute}`;
   return actualDate;
@@ -84,6 +79,17 @@ function formatDate() {
 let todayIs = document.querySelector("#today");
 
 todayIs.innerHTML = formatDate(thisDate);
+
+function changeskin() {
+  if (thisDate.getHours() <= 8 || thisDate.getHours() >= 21) {
+    document.querySelector(".container-md").style.background = "#004962";
+    document.querySelector(".container-md").style.color = "#ecd287";
+    document.querySelector("#logo").style.color = "#fff9e9";
+    document.querySelector("#bar-icon").style.color = "#fff9e9";
+  } 
+}
+
+changeskin();
 
 let covertButton = document.querySelector("#buttonTemp");
 let currentTemp = document.querySelector("#temp-digits");
@@ -124,6 +130,16 @@ function showTempAndCity(response) {
   let cityGeo = response.data.name; 
   let cityGeoName = document.querySelector("#current-city");
   cityGeoName.innerHTML = cityGeo;
+  let weatherTodayGen = document.querySelector("#descr-gen");
+  weatherTodayGen.innerHTML = response.data.weather[0].main;
+  let weatherTodayWind = document.querySelector("#wind");
+  let windSpeed = response.data.wind.speed.toString();
+  weatherTodayWind.innerHTML = `Wind speed: ${windSpeed} k/h`;
+  let weatherTodayDetails = document.querySelector("#descr-det");
+  weatherTodayDetails.innerHTML = response.data.weather[0].description;
+  let humidity = document.querySelector("#hum");
+  let humValue = response.data.main.humidity;
+  humidity.innerHTML = `Humidity: ${humValue}%`;
 }
 
 function fetchPosition(position) {
@@ -140,8 +156,6 @@ function getLocation() {
 let geoBtn = document.querySelector("#geoloc");
 
 geoBtn.addEventListener("click", getLocation);
-
-
 
 
  
