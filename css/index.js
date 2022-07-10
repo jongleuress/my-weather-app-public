@@ -1,3 +1,4 @@
+
 let form = document.querySelector("#city-form");
 let cityName = document.querySelector("#current-city");
 
@@ -33,6 +34,9 @@ form.addEventListener("submit", function cityNameCur(event) {
     let humidity = document.querySelector("#hum");
     let humValue = response.data.main.humidity;
     humidity.innerHTML = `Humidity: ${humValue}%`;
+    let iconThisDay = document.querySelector("#main-icon");
+    let icon = response.data.weather[0].icon;
+    iconThisDay.src = "media/" + icon +".png";
     let todayIsLocale = document.querySelector("#today");
     let timezone = response.data.timezone;
     let timeOffset = new Date().getTimezoneOffset();
@@ -86,20 +90,20 @@ let thisDate = new Date();
 
 // thisDate = thisDate.toLocaleTimeString('uk-UA');
 
-// function formatDate() {
-//   let weekDays = [
-//    "Sunday",
-//    "Monday",
-//    "Tuesday",
-//    "Wednesday",
-//    "Thursday",
-//    "Friday",
-//    "Saturday"
-//  ];
+ function formatDate() {
+   let weekDays = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday"
+  ];
 
-//  let day = weekDays[thisDate.getDay()];
-//  let hour = thisDate.getHours();
-//  let minute = thisDate.getMinutes();
+  let day = weekDays[thisDate.getDay()];
+  let hour = thisDate.getHours();
+  let minute = thisDate.getMinutes();
 //  if (minute < 10) {
 //    minute = `0${minute}`
 //  }
@@ -107,13 +111,13 @@ let thisDate = new Date();
 //    hour = `0${hour}`
 //  }
 
-//  let actualDate = `${day} ${hour}:${minute}`;
-//  return actualDate;
-// }
+  let actualDate = `${day} ${hour}:${minute}`;
+  return actualDate;
+ }
 
-// let todayIs = document.querySelector("#today");
+ let todayIs = document.querySelector("#today");
 
-// todayIs.innerHTML = formatDate(thisDate);
+ todayIs.innerHTML = formatDate(thisDate);
 
 // function changeskin() {
 //   if (thisDate.getHours() <= 8 || thisDate.getHours() >= 21) {
@@ -127,37 +131,58 @@ let thisDate = new Date();
 // changeskin();
 
 let covertButton = document.querySelector("#buttonTemp");
+let covertButtonFahr = document.querySelector("#buttonTemp-frh");
 let currentTemp = document.querySelector("#temp-digits");
 let currentUnit = document.querySelector("#temp-unit");
 
 // let apiKey = "89652554a85d8feaedbd9037754e146b";
 
-covertButton.addEventListener("click", function changeUnit() {
-  let tempNumber = currentTemp.textContent;
-  let temp = Number(tempNumber);
-
-  function cToF(celsius) {
-    let cTemp = celsius;
-    let cToFahr = (cTemp * 9) / 5 + 32;
-    return cToFahr;
-  }
-
-  function fToC(fahrenheit) {
-    let fTemp = fahrenheit;
-    let fToCel = ((fTemp - 32) * 5) / 9;
-    return fToCel;
-  }
+covertButtonFahr.addEventListener("click", function changeUnit() {
 
   if (currentUnit.textContent.includes("°C")) {
-    let finalTemp = Math.round(cToF(temp));
-    currentTemp.innerHTML = finalTemp.toString();
+    let tempNumber = currentTemp.textContent;
+    let temp = Number(tempNumber);
+    let cToFahr = (temp * 9) / 5 + 32;
+    cToFahr = Math.round(cToFahr);
+    currentTemp.innerHTML = cToFahr.toString();
     currentUnit.innerHTML = "F";
-  } else {
-    let finalTemp = Math.round(fToC(temp));
-    currentTemp.innerHTML = finalTemp.toString();
+  }
+})
+
+covertButton.addEventListener("click", function changeUnit() {
+
+  if (currentUnit.textContent.includes("F")) {
+    let tempNumber = currentTemp.textContent;
+    let temp = Number(tempNumber);
+    let fToCel = ((temp - 32) * 5) / 9;
+    fToCel = Math.round(fToCel);
+    currentTemp.innerHTML = fToCel.toString();
     currentUnit.innerHTML = "°C";
   }
-});
+})
+
+//   function cToF(celsius) {
+//     let cTemp = celsius;
+//     let cToFahr = (cTemp * 9) / 5 + 32;
+//     return cToFahr;
+//   }
+
+//   function fToC(fahrenheit) {
+//     let fTemp = fahrenheit;
+//     let fToCel = ((fTemp - 32) * 5) / 9;
+//     return fToCel;
+//   }
+
+//   if (currentUnit.textContent.includes("°C")) {
+//     let finalTemp = Math.round(cToF(temp));
+//     currentTemp.innerHTML = finalTemp.toString();
+//     currentUnit.innerHTML = "F";
+//   } else {
+//     let finalTemp = Math.round(fToC(temp));
+//     currentTemp.innerHTML = finalTemp.toString();
+//     currentUnit.innerHTML = "°C";
+//   }
+// });
 
 function showTempAndCity(response) {
   let tempRightNow = Math.round(response.data.main.temp);
@@ -177,7 +202,7 @@ function showTempAndCity(response) {
   humidity.innerHTML = `Humidity: ${humValue}%`;
   let iconThisDay = document.querySelector("#main-icon");
   let icon = response.data.weather[0].icon;
-  iconThisDay.src = `http://openweathermap.org/img/wn/${icon}.png`;
+  iconThisDay.src = "media/" + icon +".png";;
 
   function formatDate() {
     let weekDays = [
