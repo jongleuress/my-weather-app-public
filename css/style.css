@@ -38,10 +38,19 @@ h3 {
     color: #ffd966;
 }
 
-.btn {
+.top-button {
     margin-left: 7px;
     background: #ffd966 !important;
     color: #192938 !important;
+}
+
+.temp-button {
+    color: #ffd966 !important;
+    font-size: 28px !important;
+}
+
+.temp-button:hover {
+    color: #e69138 !important;
 }
 
 .title {

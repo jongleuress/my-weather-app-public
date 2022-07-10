@@ -33,8 +33,43 @@ form.addEventListener("submit", function cityNameCur(event) {
     let humidity = document.querySelector("#hum");
     let humValue = response.data.main.humidity;
     humidity.innerHTML = `Humidity: ${humValue}%`;
-  }
+    let todayIsLocale = document.querySelector("#today");
+    let timezone = response.data.timezone;
+    let timeOffset = new Date().getTimezoneOffset();
+    timeOffset = timeOffset * 60000;
+    let timezoneMs;
 
+    if (timeOffset < 0) {
+    timezoneMs = (timezone * 1000) + timeOffset;
+    } else {
+    timezoneMs = (timezone * 1000) - timeOffset;
+    }
+    
+    let dateLocal = new Date((new Date().getTime()) + timezoneMs);
+    let hoursLocal = dateLocal.getHours();
+    let minutesLocal = dateLocal.getMinutes();
+     if (minutesLocal < 10) {
+       minutesLocal = `0${minutesLocal}`
+     }
+     if (hoursLocal < 10) {
+       hoursLocal = `0${hoursLocal}`
+     }
+    let dateLocalFull = `${hoursLocal}:${minutesLocal}`
+    todayIsLocale.innerHTML = dateLocalFull;
+
+    if (dateLocal.getHours() <= 8 || dateLocal.getHours() >= 21) {
+      document.querySelector(".container-md").style.background = "#004962";
+      document.querySelector(".container-md").style.color = "#ecd287";
+      document.querySelector("#logo").style.color = "#fff9e9";
+      document.querySelector("#bar-icon").style.color = "#fff9e9";
+    } else {
+      document.querySelector(".container-md").style.background = "linear-gradient(0deg, rgba(21,144,145,1) 0%, rgba(55,170,191,1) 100%)";
+      document.querySelector(".container-md").style.color = "#112B3C";
+      document.querySelector("#logo").style.color = "#000000";
+      document.querySelector("#bar-icon").style.color = "#000000";
+    }
+  }
+  
   axios.get(apiURL).then(displayTemp);
 });
 
@@ -51,45 +86,45 @@ let thisDate = new Date();
 
 // thisDate = thisDate.toLocaleTimeString('uk-UA');
 
-function formatDate() {
-  let weekDays = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday"
-  ];
+// function formatDate() {
+//   let weekDays = [
+//    "Sunday",
+//    "Monday",
+//    "Tuesday",
+//    "Wednesday",
+//    "Thursday",
+//    "Friday",
+//    "Saturday"
+//  ];
 
-  let day = weekDays[thisDate.getDay()];
-  let hour = thisDate.getHours();
-  let minute = thisDate.getMinutes();
-  if (minute < 10) {
-    minute = `0${minute}`
-  }
-  if (hour < 10) {
-    hour = `0${hour}`
-  }
+//  let day = weekDays[thisDate.getDay()];
+//  let hour = thisDate.getHours();
+//  let minute = thisDate.getMinutes();
+//  if (minute < 10) {
+//    minute = `0${minute}`
+//  }
+//  if (hour < 10) {
+//    hour = `0${hour}`
+//  }
 
-  let actualDate = `${day} ${hour}:${minute}`;
-  return actualDate;
-}
+//  let actualDate = `${day} ${hour}:${minute}`;
+//  return actualDate;
+// }
 
-let todayIs = document.querySelector("#today");
+// let todayIs = document.querySelector("#today");
 
-todayIs.innerHTML = formatDate(thisDate);
+// todayIs.innerHTML = formatDate(thisDate);
 
-function changeskin() {
-  if (thisDate.getHours() <= 8 || thisDate.getHours() >= 21) {
-    document.querySelector(".container-md").style.background = "#004962";
-    document.querySelector(".container-md").style.color = "#ecd287";
-    document.querySelector("#logo").style.color = "#fff9e9";
-    document.querySelector("#bar-icon").style.color = "#fff9e9";
-  } 
-}
+// function changeskin() {
+//   if (thisDate.getHours() <= 8 || thisDate.getHours() >= 21) {
+//     document.querySelector(".container-md").style.background = "#004962";
+//     document.querySelector(".container-md").style.color = "#ecd287";
+//     document.querySelector("#logo").style.color = "#fff9e9";
+//     document.querySelector("#bar-icon").style.color = "#fff9e9";
+//   } 
+// }
 
-changeskin();
+// changeskin();
 
 let covertButton = document.querySelector("#buttonTemp");
 let currentTemp = document.querySelector("#temp-digits");
@@ -140,6 +175,53 @@ function showTempAndCity(response) {
   let humidity = document.querySelector("#hum");
   let humValue = response.data.main.humidity;
   humidity.innerHTML = `Humidity: ${humValue}%`;
+  let iconThisDay = document.querySelector("#main-icon");
+  let icon = response.data.weather[0].icon;
+  iconThisDay.src = `http://openweathermap.org/img/wn/${icon}.png`;
+
+  function formatDate() {
+    let weekDays = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday"
+   ];
+
+     let day = weekDays[thisDate.getDay()];
+     let hour = thisDate.getHours();
+     let minute = thisDate.getMinutes();
+     
+     if (minute < 10) {
+      minute = `0${minute}`
+     }
+     if (hour < 10) {
+      hour = `0${hour}`
+     }
+
+     let actualDate = `${day} ${hour}:${minute}`;
+      return actualDate;
+    
+  }
+
+   let todayIs = document.querySelector("#today");
+
+   todayIs.innerHTML = formatDate(thisDate);
+
+   if (thisDate.getHours() <= 8 || thisDate.getHours() >= 21) {
+     document.querySelector(".container-md").style.background = "#004962";
+     document.querySelector(".container-md").style.color = "#ecd287";
+     document.querySelector("#logo").style.color = "#fff9e9";
+     document.querySelector("#bar-icon").style.color = "#fff9e9";
+   } else {
+     document.querySelector(".container-md").style.background = "linear-gradient(0deg, rgba(21,144,145,1) 0%, rgba(55,170,191,1) 100%)";
+     document.querySelector(".container-md").style.color = "#112B3C";
+     document.querySelector("#logo").style.color = "#000000";
+     document.querySelector("#bar-icon").style.color = "#000000";
+   }
+
 }
 
 function fetchPosition(position) {
